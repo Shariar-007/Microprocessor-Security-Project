@@ -1,0 +1,88 @@
+#define RED 6
+
+#define GREEN 7
+
+#define BLUE 8
+
+#define BUZZ 13
+
+#define PIR 2
+
+int motion = 0;
+
+
+void setup()
+
+{
+	Serial.begin(9600);
+	
+Serial.println();
+	
+Serial.println("+----------------+");
+
+	Serial.println("| HC-SR501 ALARM |");
+
+	Serial.println("+----------------+");
+	
+Serial.println();
+
+
+	pinMode(RED, OUTPUT);   //6
+
+	pinMode(GREEN, OUTPUT);  //7
+	
+pinMode(BLUE, OUTPUT);        //8
+
+	pinMode(PIR, INPUT);     //2
+
+}
+
+
+void loop()
+
+{
+	
+//  digitalWrite(LED, digitalRead(PIR));
+
+
+	int motion = digitalRead(PIR);
+
+
+	if (motion == HIGH)
+	
+{
+		Serial.println("Intruder alert!");
+
+		digitalWrite(RED, HIGH);
+	
+	digitalWrite(GREEN, LOW);
+
+		digitalWrite(BLUE, LOW);
+
+		tone(BUZZ, 1000);
+		
+delay(500);
+	
+	digitalWrite(RED, LOW);
+	
+	noTone(BUZZ);
+	
+}
+	
+else
+	
+{
+
+		
+noTone(BUZZ);
+	
+	digitalWrite(RED, HIGH);
+
+
+	digitalWrite(GREEN, HIGH);
+	
+	digitalWrite(BLUE, LOW);
+	
+}
+
+}
